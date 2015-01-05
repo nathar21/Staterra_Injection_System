@@ -4,7 +4,7 @@
     <string name="app_name">Staterra Injection System</string>
     <string name="hello_world">Hello People!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_current__environmental__status">Current_Environmental_Status</string>
-    <string name="title_activity_data__exportation">Data_Exportation</string>
+    <string name="title_activity_current__environmental__status">Current Environmental Status</string>
+    <string name="title_activity_data__exportation">Data Exportation</string>
 
 </resources>

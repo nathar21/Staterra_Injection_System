@@ -17,11 +17,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Current_Environmental_Status"
+            android:name=".CurrentEnvironmentalStatus"
             android:label="@string/title_activity_current__environmental__status" >
         </activity>
         <activity
-            android:name=".Data_Exportation"
+            android:name=".DataExportation"
             android:label="@string/title_activity_data__exportation" >
         </activity>
     </application>
