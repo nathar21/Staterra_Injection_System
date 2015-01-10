@@ -25,7 +25,7 @@
             android:label="@string/title_activity_data__exportation" >
         </activity>
         <activity
-            android:name=".Current_Tank_Status"
+            android:name=".CurrentTankStatus"
             android:label="@string/title_activity_current__tank__status" >
         </activity>
     </application>
