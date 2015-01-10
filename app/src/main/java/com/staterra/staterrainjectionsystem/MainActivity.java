@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
         });
         page3.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent myIntent = new Intent(MainActivity.this, Current_Tank_Status.class);
+                Intent myIntent = new Intent(MainActivity.this, CurrentTankStatus.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });

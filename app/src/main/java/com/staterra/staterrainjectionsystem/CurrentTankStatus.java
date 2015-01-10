@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class Current_Tank_Status extends ActionBarActivity {
+public class CurrentTankStatus extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
