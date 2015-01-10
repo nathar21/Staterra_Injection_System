@@ -13,6 +13,7 @@ public class MainActivity extends ActionBarActivity {
 
     Button page1;
     Button page2;
+    Button page3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class MainActivity extends ActionBarActivity {
     private void createButtons(){
         page1 = (Button)findViewById(R.id.button);
         page2 = (Button)findViewById(R.id.button2);
+        page3 = (Button)findViewById(R.id.button3);
 
         page1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -35,6 +37,12 @@ public class MainActivity extends ActionBarActivity {
         page2.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent myIntent = new Intent(MainActivity.this, Data_Exportation.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+        page3.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent myIntent = new Intent(MainActivity.this, Current_Tank_Status.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });

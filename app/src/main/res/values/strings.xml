@@ -6,5 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_current__environmental__status">Current_Environmental_Status</string>
     <string name="title_activity_data__exportation">Data_Exportation</string>
+    <string name="title_activity_current__tank__status">Current_Tank_Status</string>
 
 </resources>
