@@ -28,15 +28,15 @@ public class MainActivity extends ActionBarActivity {
         page2 = (Button)findViewById(R.id.button2);
         page3 = (Button)findViewById(R.id.button3);
 
-        page1.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent myIntent = new Intent(MainActivity.this, Current_Environmental_Status.class);
+        page1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, CurrentEnvironmentalStatus.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });
-        page2.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent myIntent = new Intent(MainActivity.this, Data_Exportation.class);
+        page2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, DataExportation.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });

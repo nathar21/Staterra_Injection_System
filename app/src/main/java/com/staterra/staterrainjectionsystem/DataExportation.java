@@ -6,12 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class Data_Exportation extends ActionBarActivity {
+public class DataExportation extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data__exportation);
+        setContentView(R.layout.activity_data_exportation);
     }
 
 

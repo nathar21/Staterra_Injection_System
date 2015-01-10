@@ -6,12 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class Current_Environmental_Status extends ActionBarActivity {
+public class CurrentEnvironmentalStatus extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current__environmental__status);
+        setContentView(R.layout.activity_current_environmental_status);
     }
 
 
