@@ -27,9 +27,7 @@ public class DataExportation extends ActionBarActivity {
 
         main.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent;
-                myIntent = new Intent(DataExportation.this, MainActivity.class);
-                DataExportation.this.startActivity(myIntent);
+                finish();
             }
         });
         export.setOnClickListener(new View.OnClickListener() {

@@ -25,6 +25,36 @@ public class MainActivity extends ActionBarActivity {
         createButtons();
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        blueTooth.stopWorker = true;
+        if (blueTooth.mmInputStream != null) {
+            try {blueTooth.mmInputStream.close();} catch (Exception e) {}
+            blueTooth.mmInputStream = null;
+        }
+
+        if (blueTooth.mmOutputStream != null) {
+            try {blueTooth.mmOutputStream.close();} catch (Exception e) {}
+            blueTooth.mmOutputStream = null;
+        }
+
+        if (blueTooth.mmSocket != null) {
+            try {blueTooth.mmSocket.close();} catch (Exception e) {}
+            blueTooth.mmSocket = null;
+        }
+    }
+
     private void createButtons(){
         page1 = (Button)findViewById(R.id.button);
         page2 = (Button)findViewById(R.id.button2);

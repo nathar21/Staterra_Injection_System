@@ -30,6 +30,7 @@ public class MyBlueTooth {
 	
 	public MyBlueTooth(MainActivity mainActivity){
 		this.mainActivity = mainActivity;
+        findBT();
 	}
 	
 	public void findBT()

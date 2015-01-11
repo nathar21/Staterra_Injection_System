@@ -25,9 +25,7 @@ public class CurrentTankStatus extends ActionBarActivity {
 
         main.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent;
-                myIntent = new Intent(CurrentTankStatus.this, MainActivity.class);
-                CurrentTankStatus.this.startActivity(myIntent);
+                finish();
             }
         });
     }

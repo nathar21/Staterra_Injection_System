@@ -25,9 +25,7 @@ public class CurrentEnvironmentalStatus extends ActionBarActivity {
 
         main.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent;
-                myIntent = new Intent(CurrentEnvironmentalStatus.this, MainActivity.class);
-                CurrentEnvironmentalStatus.this.startActivity(myIntent);
+                finish();
             }
         });
     }
