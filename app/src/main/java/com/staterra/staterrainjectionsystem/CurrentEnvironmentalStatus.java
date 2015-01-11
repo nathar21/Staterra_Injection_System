@@ -1,22 +1,27 @@
 package com.staterra.staterrainjectionsystem;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class CurrentEnvironmentalStatus extends ActionBarActivity {
 
+    GlobalData globalData;
+    TextView tankTemp;
     private Button main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_environmental_status);
+        globalData = (GlobalData)getIntent().getParcelableExtra(MainActivity.PAR_KEY);
+        tankTemp = (TextView)findViewById(R.id.tankTemp);
+        tankTemp.setText(globalData.getTankTemp());
         createButtons();
     }
 

@@ -1,55 +1,139 @@
 package com.staterra.staterrainjectionsystem;
 
-import java.util.GregorianCalendar;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by Terrell on 1/11/2015.
  */
-public class GlobalData {
+public class GlobalData implements Parcelable {
 
-    private GregorianCalendar dateTime;
-    private int tankTemp;
-    private int irrigationTemp;
-    private int nutrientAmountLeft;
-    private int batteryLife;
+    private String month = "ND";
+    private String day = "ND";
+    private String year = "ND";
+    private String hour = "ND";
+    private String minute = "ND";
+    private String second = "ND";
+    private String tankTemp = "ND";
+    private String irrigationTemp = "ND";
+    private String nutrientAmountLeft = "ND";
+    private String batteryLife = "ND";
 
-    public GregorianCalendar getDateTime() {
-        return dateTime;
+    public String getMonth() {
+        return month;
     }
 
-    public void setDateTime(GregorianCalendar dateTime) {
-        this.dateTime = dateTime;
+    public void setMonth(String month) {
+        this.month = month;
     }
 
-    public int getTankTemp() {
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    public String getMinute() {
+        return minute;
+    }
+
+    public void setMinute(String minute) {
+        this.minute = minute;
+    }
+
+    public String getSecond() {
+        return second;
+    }
+
+    public void setSecond(String second) {
+        this.second = second;
+    }
+
+    public String getTankTemp() {
         return tankTemp;
     }
 
-    public void setTankTemp(int tankTemp) {
+    public void setTankTemp(String tankTemp) {
         this.tankTemp = tankTemp;
     }
 
-    public int getIrrigationTemp() {
+    public String getIrrigationTemp() {
         return irrigationTemp;
     }
 
-    public void setIrrigationTemp(int irrigationTemp) {
+    public void setIrrigationTemp(String irrigationTemp) {
         this.irrigationTemp = irrigationTemp;
     }
 
-    public int getNutrientAmountLeft() {
+    public String getNutrientAmountLeft() {
         return nutrientAmountLeft;
     }
 
-    public void setNutrientAmountLeft(int nutrientAmountLeft) {
+    public void setNutrientAmountLeft(String nutrientAmountLeft) {
         this.nutrientAmountLeft = nutrientAmountLeft;
     }
 
-    public int getBatteryLife() {
+    public String getBatteryLife() {
         return batteryLife;
     }
 
-    public void setBatteryLife(int batteryLife) {
+    public void setBatteryLife(String batteryLife) {
         this.batteryLife = batteryLife;
     }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(month);
+        out.writeString(day);
+        out.writeString(year);
+        out.writeString(hour);
+        out.writeString(minute);
+        out.writeString(second);
+        out.writeString(tankTemp);
+        out.writeString(irrigationTemp);
+        out.writeString(nutrientAmountLeft);
+        out.writeString(batteryLife);
+    }
+
+    public static final Parcelable.Creator<GlobalData> CREATOR = new Creator<GlobalData>() {
+        public GlobalData createFromParcel(Parcel source) {
+            GlobalData gd = new GlobalData();
+            gd.month = source.readString();
+            gd.day = source.readString();
+            gd.year = source.readString();
+            gd.hour = source.readString();
+            gd.minute = source.readString();
+            gd.second = source.readString();
+            gd.tankTemp = source.readString();
+            gd.irrigationTemp = source.readString();
+            gd.nutrientAmountLeft = source.readString();
+            gd.batteryLife = source.readString();
+            return gd;
+        }
+        public GlobalData[] newArray(int size) {
+            return new GlobalData[size];
+        }
+    };
+
 }

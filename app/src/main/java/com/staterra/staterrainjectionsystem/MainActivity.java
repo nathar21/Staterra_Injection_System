@@ -11,8 +11,9 @@ import android.widget.Button;
 //testing lola begs too good
 public class MainActivity extends ActionBarActivity {
 
+    public final static String PAR_KEY = "com.staterra.staterrainjectionsystem.GlobalData.par";
     GlobalData globalData = new GlobalData();
-    MyBlueTooth blueTooth;
+    public MyBlueTooth blueTooth;
     Button page1;
     Button page2;
     Button page3;
@@ -21,8 +22,19 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        blueTooth = new MyBlueTooth(this);
+        blueTooth = new MyBlueTooth(this, globalData);
         createButtons();
+        if(blueTooth.isConnected){
+            getMicroData();
+        }
+    }
+
+    public void getMicroData(){
+        try{
+            blueTooth.getTemp();
+        }catch(Exception e){
+
+        }
     }
 
     @Override
@@ -63,6 +75,9 @@ public class MainActivity extends ActionBarActivity {
         page1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, CurrentEnvironmentalStatus.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putParcelable(PAR_KEY, globalData);
+                myIntent.putExtras(mBundle);
                 MainActivity.this.startActivity(myIntent);
             }
         });

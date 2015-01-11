@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,18 +23,22 @@
         </activity>
         <activity
             android:name=".CurrentEnvironmentalStatus"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_current__environmental__status" >
         </activity>
         <activity
             android:name=".DataExportation"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_data__exportation" >
         </activity>
         <activity
             android:name=".CurrentTankStatus"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_current__tank__status" >
         </activity>
         <activity
             android:name=".DownloadingData"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_downloading_data" >
         </activity>
     </application>

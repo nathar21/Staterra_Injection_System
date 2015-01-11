@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 public class MyBlueTooth {
     MainActivity mainActivity;
+    GlobalData globalData;
     AndroidFileWriter writer = new AndroidFileWriter();
 	private static final int REQUEST_ENABLE_BT = 1;
 	BluetoothAdapter mBluetoothAdapter;
@@ -24,12 +25,15 @@ public class MyBlueTooth {
 	Thread workerThread;
 	byte[] readBuffer;
 	int readBufferPosition;
-	int counter;
+    String data;
 	volatile boolean stopWorker;
+    public boolean isConnected = false;
 	boolean isWriting = false;
+    boolean gettingTemp = false;
 	
-	public MyBlueTooth(MainActivity mainActivity){
+	public MyBlueTooth(MainActivity mainActivity, GlobalData globalData){
 		this.mainActivity = mainActivity;
+        this.globalData = globalData;
         findBT();
 	}
 	
@@ -80,6 +84,7 @@ public class MyBlueTooth {
 		    mmInputStream = mmSocket.getInputStream();
             Toast.makeText(mainActivity.getApplicationContext(), "Connected to Controller", Toast.LENGTH_SHORT).show();
             listenForData();
+            isConnected = true;
 	    }catch(Exception IOException){
             Toast.makeText(mainActivity.getApplicationContext(), "Could Not Connect to Controller", Toast.LENGTH_SHORT).show();
 	    }
@@ -113,7 +118,7 @@ public class MyBlueTooth {
 	                            {
 								     byte[] encodedBytes = new byte[readBufferPosition];
 								     System.arraycopy(readBuffer, 0, encodedBytes, 0, encodedBytes.length);
-								     final String data = new String(encodedBytes, "US-ASCII");
+								     data = new String(encodedBytes, "US-ASCII");
 								     readBufferPosition = 0;
 
 	                                handler.post(new Runnable()
@@ -122,8 +127,9 @@ public class MyBlueTooth {
 	                                    {
 	                                    	if(isWriting){
 		                                        writer.write(data);
-	                                    	}else{
-		                                        //myLabel.append("\n" + data);
+	                                    	}else if(gettingTemp){
+                                                globalData.setTankTemp(data);
+                                                gettingTemp = false;
 	                                    	}
 	                                    }
 	                                });
@@ -148,33 +154,32 @@ public class MyBlueTooth {
 	
 	public void sendData(String x) throws IOException
 	{
-        byte y;
 		if(x.equals("info")){
-            y = 0x31;
 			mmOutputStream.write(1);
 		}else if(x.equals("read")){
-            y = 0x32;
 			mmOutputStream.write(2);
 		}else if(x.equals("delete")){
-            y = 0x33;
             mmOutputStream.write(3);
 		}else if(x.equals("collect")){
-            y = 0x34;
             mmOutputStream.write(4);
 		}else if(x.equals("stop")){
-            y = 0x35;
             mmOutputStream.write(5);
 		}
         mmOutputStream.flush();
 	}
-	void stopBT() throws IOException
+
+    public void getTemp() throws IOException{
+        gettingTemp = true;
+        mmOutputStream.write(20);
+    }
+
+	public void stopBT() throws IOException
 	{
 	    stopWorker = true;
 	    mmOutputStream.close();
 	    mmInputStream.close();
 	    mmSocket.close();
+        isConnected = false;
         Toast.makeText(mainActivity.getApplicationContext(), "BlueTooth Closed", Toast.LENGTH_SHORT).show();
-        //logger.isStreamOpen = false;
-	    //logger.setStreamOpenButtons();
 	}
 }
