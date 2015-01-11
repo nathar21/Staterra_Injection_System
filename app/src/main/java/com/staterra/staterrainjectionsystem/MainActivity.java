@@ -11,6 +11,8 @@ import android.widget.Button;
 //testing lola begs too good
 public class MainActivity extends ActionBarActivity {
 
+    GlobalData globalData = new GlobalData();
+    MyBlueTooth blueTooth;
     Button page1;
     Button page2;
     Button page3;
@@ -19,7 +21,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //SetMainPage();
+        blueTooth = new MyBlueTooth(this);
         createButtons();
     }
 
