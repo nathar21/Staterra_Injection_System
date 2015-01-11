@@ -13,9 +13,9 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:text="Current Environmental Status"
+        android:text="Environmental Status"
         android:id="@+id/button"
-        android:textColor="#ff1a1cff"
+        android:textColor="#ffffffff"
         android:clickable="true" />
 
     <Button
@@ -23,9 +23,8 @@
         android:layout_height="140dp"
         android:text="Data Exportation"
         android:id="@+id/button2"
-        android:layout_gravity="center_vertical"
-        android:textColor="#ff1a1cff"
-        android:singleLine="true"
+        android:textColor="#ffffffff"
+        android:singleLine="false"
         android:clickable="true" />
 
     <Button
@@ -36,6 +35,8 @@
         android:layout_weight="0.35"
         android:elegantTextHeight="false"
         android:clickable="true"
-        android:textColor="#ff4b2eff" />
+        android:textColor="#ffffffff"
+        android:singleLine="false"
+        android:enabled="true" />
 
 </LinearLayout>

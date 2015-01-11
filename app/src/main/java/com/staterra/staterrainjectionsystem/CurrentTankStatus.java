@@ -1,17 +1,35 @@
 package com.staterra.staterrainjectionsystem;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class CurrentTankStatus extends ActionBarActivity {
+
+    private Button main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current__tank__status);
+        createButtons();
+    }
+
+    private void createButtons(){
+        main = (Button)findViewById(R.id.buttonMain3);
+
+        main.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent;
+                myIntent = new Intent(CurrentTankStatus.this, MainActivity.class);
+                CurrentTankStatus.this.startActivity(myIntent);
+            }
+        });
     }
 
 

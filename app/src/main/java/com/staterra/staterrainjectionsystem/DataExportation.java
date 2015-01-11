@@ -1,17 +1,44 @@
 package com.staterra.staterrainjectionsystem;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class DataExportation extends ActionBarActivity {
+
+    private Button main;
+    private Button export;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_exportation);
+        createButtons();
+    }
+
+    private void createButtons(){
+        main = (Button)findViewById(R.id.buttonMain2);
+        export = (Button)findViewById(R.id.buttonExport);
+
+        main.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent;
+                myIntent = new Intent(DataExportation.this, MainActivity.class);
+                DataExportation.this.startActivity(myIntent);
+            }
+        });
+        export.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent;
+                myIntent = new Intent(DataExportation.this, DownloadingData.class);
+                DataExportation.this.startActivity(myIntent);
+            }
+        });
     }
 
 

@@ -1,42 +1,24 @@
 package com.staterra.staterrainjectionsystem;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 
-public class CurrentEnvironmentalStatus extends ActionBarActivity {
-
-    private Button main;
+public class DownloadingData extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current_environmental_status);
-        createButtons();
-    }
-
-    private void createButtons(){
-        main = (Button)findViewById(R.id.buttonMain1);
-
-        main.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent myIntent;
-                myIntent = new Intent(CurrentEnvironmentalStatus.this, MainActivity.class);
-                CurrentEnvironmentalStatus.this.startActivity(myIntent);
-            }
-        });
+        setContentView(R.layout.activity_downloading_data);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_current_environmental_status, menu);
+        getMenuInflater().inflate(R.menu.menu_downloading_data, menu);
         return true;
     }
 

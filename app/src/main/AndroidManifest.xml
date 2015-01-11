@@ -28,6 +28,10 @@
             android:name=".CurrentTankStatus"
             android:label="@string/title_activity_current__tank__status" >
         </activity>
+        <activity
+            android:name=".DownloadingData"
+            android:label="@string/title_activity_downloading_data" >
+        </activity>
     </application>
 
 </manifest>
