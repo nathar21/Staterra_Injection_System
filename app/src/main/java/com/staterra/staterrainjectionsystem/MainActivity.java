@@ -13,7 +13,7 @@ public class MainActivity extends ActionBarActivity {
 
     public final static String PAR_KEY = "com.staterra.staterrainjectionsystem.GlobalData.par";
     GlobalData globalData = new GlobalData();
-    public MyBlueTooth blueTooth;
+    public static MyBlueTooth blueTooth;
     Button page1;
     Button page2;
     Button page3;
@@ -31,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void getMicroData(){
         try{
-            blueTooth.getTemp();
+            blueTooth.getTankTemp();
         }catch(Exception e){
 
         }
@@ -90,6 +90,9 @@ public class MainActivity extends ActionBarActivity {
         page3.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent myIntent = new Intent(MainActivity.this, CurrentTankStatus.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putParcelable(PAR_KEY, globalData);
+                myIntent.putExtras(mBundle);
                 MainActivity.this.startActivity(myIntent);
             }
         });

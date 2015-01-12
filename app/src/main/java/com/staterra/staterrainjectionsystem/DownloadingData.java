@@ -12,6 +12,11 @@ public class DownloadingData extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_downloading_data);
+        try{
+            MainActivity.blueTooth.getDataFile();
+        }catch(Exception e){
+
+        }
     }
 
 

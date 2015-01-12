@@ -125,8 +125,9 @@ public class MyBlueTooth {
 	                                {
 	                                    public void run()
 	                                    {
-	                                    	if(isWriting){
-		                                        writer.write(data);
+                                            System.out.println(data);
+                                            if(isWriting){
+                                                writer.write(data);
 	                                    	}else if(gettingTemp){
                                                 globalData.setTankTemp(data);
                                                 gettingTemp = false;
@@ -168,9 +169,14 @@ public class MyBlueTooth {
         mmOutputStream.flush();
 	}
 
-    public void getTemp() throws IOException{
+    public void getTankTemp() throws IOException{
         gettingTemp = true;
         mmOutputStream.write(20);
+    }
+
+    public void getDataFile() throws IOException{
+        isWriting = true;
+        mmOutputStream.write(10);
     }
 
 	public void stopBT() throws IOException
