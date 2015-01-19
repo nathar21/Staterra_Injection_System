@@ -13,33 +13,40 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".SystemConfiguration"
+            android:label="@string/title_activity_system_configuration"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".DataExportation"
+            android:label="@string/title_activity_data__exportation"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".SystemStatus"
+            android:label="@string/title_activity_system__status"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".DownloadingData"
+            android:label="@string/title_activity_downloading_data"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".WelcomeScreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/FullscreenTheme"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".SystemConfiguration"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_system_configuration" >
-        </activity>
-        <activity
-            android:name=".DataExportation"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_data__exportation" >
-        </activity>
-        <activity
-            android:name=".SystemStatus"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_system__status" >
-        </activity>
-        <activity
-            android:name=".DownloadingData"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_downloading_data" >
         </activity>
     </application>
 
