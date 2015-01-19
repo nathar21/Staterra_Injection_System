@@ -5,38 +5,45 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:weightSum="1"
-    android:background="#ff171717"
+    android:background="#798251"
     android:orientation="vertical"
     android:dividerPadding="70dp"
     android:focusableInTouchMode="true">
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:text="Environmental Status"
+        android:layout_height="130dp"
+        android:text="System Configuration"
         android:id="@+id/button"
-        android:textColor="#ffffffff"
-        android:clickable="true" />
+        android:textColor="#a89d8f"
+        android:clickable="true"
+        android:background="#3d3015"
+        android:layout_marginBottom="5dp" />
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="130dp"
+        android:text="System Status"
+        android:id="@+id/button3"
+        android:textColor="#a89d8f"
+        android:singleLine="false"
+        android:clickable="true"
+        android:background="#3d3015"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
         android:text="Data Exportation"
         android:id="@+id/button2"
-        android:textColor="#ffffffff"
-        android:singleLine="false"
-        android:clickable="true" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:text="Current Tank Status"
-        android:id="@+id/button3"
         android:layout_weight="0.35"
         android:elegantTextHeight="false"
         android:clickable="true"
-        android:textColor="#ffffffff"
+        android:textColor="#a89d8f"
         android:singleLine="false"
-        android:enabled="true" />
+        android:enabled="true"
+        android:background="#3d3015"
+        android:layout_marginTop="5dp" />
 
 </LinearLayout>

@@ -1,27 +1,32 @@
 package com.staterra.staterrainjectionsystem;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
-public class CurrentTankStatus extends ActionBarActivity {
+public class SystemConfiguration extends ActionBarActivity {
 
+    GlobalData globalData;
+    TextView tankTemp;
     private Button main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current__tank__status);
+        setContentView(R.layout.activity_system_configuration);
+        globalData = (GlobalData)getIntent().getParcelableExtra(MainActivity.PAR_KEY);
+        tankTemp = (TextView)findViewById(R.id.tankTemp);
+        tankTemp.setText(globalData.getTankTemp());
         createButtons();
     }
 
     private void createButtons(){
-        main = (Button)findViewById(R.id.buttonMain3);
+        main = (Button)findViewById(R.id.buttonMain1);
 
         main.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -34,7 +39,7 @@ public class CurrentTankStatus extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_current__tank__status, menu);
+        getMenuInflater().inflate(R.menu.menu_system_configuration, menu);
         return true;
     }
 

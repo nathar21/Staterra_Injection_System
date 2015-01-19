@@ -74,7 +74,7 @@ public class MainActivity extends ActionBarActivity {
 
         page1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, CurrentEnvironmentalStatus.class);
+                Intent myIntent = new Intent(MainActivity.this, SystemConfiguration.class);
                 Bundle mBundle = new Bundle();
                 mBundle.putParcelable(PAR_KEY, globalData);
                 myIntent.putExtras(mBundle);
@@ -89,7 +89,7 @@ public class MainActivity extends ActionBarActivity {
         });
         page3.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent myIntent = new Intent(MainActivity.this, CurrentTankStatus.class);
+                Intent myIntent = new Intent(MainActivity.this, SystemStatus.class);
                 Bundle mBundle = new Bundle();
                 mBundle.putParcelable(PAR_KEY, globalData);
                 myIntent.putExtras(mBundle);

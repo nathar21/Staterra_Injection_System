@@ -6,27 +6,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 
-public class CurrentEnvironmentalStatus extends ActionBarActivity {
+public class SystemStatus extends ActionBarActivity {
 
-    GlobalData globalData;
-    TextView tankTemp;
     private Button main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current_environmental_status);
-        globalData = (GlobalData)getIntent().getParcelableExtra(MainActivity.PAR_KEY);
-        tankTemp = (TextView)findViewById(R.id.tankTemp);
-        tankTemp.setText(globalData.getTankTemp());
+        setContentView(R.layout.activity_system__status);
         createButtons();
     }
 
     private void createButtons(){
-        main = (Button)findViewById(R.id.buttonMain1);
+        main = (Button)findViewById(R.id.buttonMain3);
 
         main.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -39,7 +33,7 @@ public class CurrentEnvironmentalStatus extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_current_environmental_status, menu);
+        getMenuInflater().inflate(R.menu.menu_system__status, menu);
         return true;
     }
 

@@ -22,9 +22,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CurrentEnvironmentalStatus"
+            android:name=".SystemConfiguration"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_current__environmental__status" >
+            android:label="@string/title_activity_system_configuration" >
         </activity>
         <activity
             android:name=".DataExportation"
@@ -32,9 +32,9 @@
             android:label="@string/title_activity_data__exportation" >
         </activity>
         <activity
-            android:name=".CurrentTankStatus"
+            android:name=".SystemStatus"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_current__tank__status" >
+            android:label="@string/title_activity_system__status" >
         </activity>
         <activity
             android:name=".DownloadingData"
