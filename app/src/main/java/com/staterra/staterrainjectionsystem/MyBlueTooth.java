@@ -5,15 +5,21 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Set;
 import java.util.UUID;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Handler;
-import android.widget.Toast;
+import android.os.IBinder;
 
-public class MyBlueTooth {
-    MainActivity mainActivity;
+public class MyBlueTooth extends Service {
+    private final IBinder mBinder = new LocalBinder();
     GlobalData globalData;
     AndroidFileWriter writer = new AndroidFileWriter();
 	private static final int REQUEST_ENABLE_BT = 1;
@@ -30,35 +36,44 @@ public class MyBlueTooth {
     public boolean isConnected = false;
 	boolean isWriting = false;
     boolean gettingTemp = false;
-	
-	public MyBlueTooth(MainActivity mainActivity, GlobalData globalData){
-		this.mainActivity = mainActivity;
-        this.globalData = globalData;
+
+    public class LocalBinder extends Binder {
+        MyBlueTooth getService() {
+            return MyBlueTooth.this;
+        }
+    }
+
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
         findBT();
-	}
-	
-	public void findBT()
+        return Service.START_NOT_STICKY;
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return mBinder;
+    }
+
+    public void findBT()
 	{
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		if (mBluetoothAdapter == null) {
-            Toast.makeText(mainActivity.getApplicationContext(), "Device is not BT Capable", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mainActivity.getApplicationContext(), "Device is not BT Capable", Toast.LENGTH_SHORT).show();
 		}else{
 		    enableBT();
 		}
 	}
-	//checks to see if BT is enabled, if it isn't, requests permission
-	//**************COMPLETE*****************
+
 	public void enableBT(){
 		if (!mBluetoothAdapter.isEnabled()) {
 		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-		    mainActivity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+		    //mainActivity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 		}else{
 			setPaired();
 		}
 	}
-	
-	//set the Paired device
-	//***************COMPLETE*******************
+
 	public void setPaired(){
 		Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
 	    if(pairedDevices.size() > 0)
@@ -73,22 +88,37 @@ public class MyBlueTooth {
 	        }
 	    }
 	}
-	//Opens the bluetooth IO connection
-	//****************COMPLETE********************
+
 	public void openBT(){
 	    UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //Standard SerialPortService ID
-	    try{
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        try{
 	    	mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);        
 		    mmSocket.connect();
 		    mmOutputStream = mmSocket.getOutputStream();
 		    mmInputStream = mmSocket.getInputStream();
-            Toast.makeText(mainActivity.getApplicationContext(), "Connected to Controller", Toast.LENGTH_SHORT).show();
+            Notification n  = new Notification.Builder(this)
+                    .setContentTitle("Staterra BlueTooth")
+                    .setContentText("Connected")
+                    .setAutoCancel(true)
+                    .setSmallIcon(R.drawable.ic_launcher).build();
+            notificationManager.notify(0, n);
             listenForData();
             isConnected = true;
 	    }catch(Exception IOException){
-            Toast.makeText(mainActivity.getApplicationContext(), "Could Not Connect to Controller", Toast.LENGTH_SHORT).show();
+            Notification n  = new Notification.Builder(this)
+                    .setContentTitle("Staterra BlueTooth")
+                    .setContentText("Not Connected")
+                    .setSmallIcon(R.drawable.ic_launcher)
+                    .addAction(R.drawable.ic_launcher, "Retry", pIntent).build();
+            notificationManager.notify(0, n);
 	    }
-	}
+
+    }
 	
 	public void listenForData()
 	{
@@ -186,6 +216,10 @@ public class MyBlueTooth {
 	    mmInputStream.close();
 	    mmSocket.close();
         isConnected = false;
-        Toast.makeText(mainActivity.getApplicationContext(), "BlueTooth Closed", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mainActivity.getApplicationContext(), "BlueTooth Closed", Toast.LENGTH_SHORT).show();
 	}
+
+    public boolean isConnected(){
+        return isConnected;
+    }
 }

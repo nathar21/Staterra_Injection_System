@@ -1,6 +1,10 @@
 package com.staterra.staterrainjectionsystem;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,11 +12,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.IOException;
+
 
 public class DataExportation extends ActionBarActivity {
-
+    MyBlueTooth bluetooth;
+    boolean btBounded = false;
     private Button main;
     private Button export;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = new Intent(this, MyBlueTooth.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +34,22 @@ public class DataExportation extends ActionBarActivity {
         setContentView(R.layout.activity_data_exportation);
         createButtons();
     }
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            MyBlueTooth.LocalBinder binder = (MyBlueTooth.LocalBinder) service;
+            bluetooth = binder.getService();
+            btBounded = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            btBounded = false;
+        }
+    };
+
 
     private void createButtons(){
         main = (Button)findViewById(R.id.buttonMain2);
@@ -32,6 +62,13 @@ public class DataExportation extends ActionBarActivity {
         });
         export.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if(bluetooth.isConnected()){
+                    try{
+                        bluetooth.getDataFile();
+                    }catch(IOException e){
+
+                    }
+                }
                 Intent myIntent;
                 myIntent = new Intent(DataExportation.this, DownloadingData.class);
                 DataExportation.this.startActivity(myIntent);
@@ -39,6 +76,14 @@ public class DataExportation extends ActionBarActivity {
         });
     }
 
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(btBounded) {
+            unbindService(mConnection);
+            btBounded = false;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

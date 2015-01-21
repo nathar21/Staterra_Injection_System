@@ -1,22 +1,35 @@
 package com.staterra.staterrainjectionsystem;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.IOException;
+
 
 public class DownloadingData extends ActionBarActivity {
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    };
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_downloading_data);
-        try{
-            MainActivity.blueTooth.getDataFile();
-        }catch(Exception e){
-
-        }
     }
 
 

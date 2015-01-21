@@ -13,7 +13,6 @@ public class MainActivity extends ActionBarActivity {
 
     public final static String PAR_KEY = "com.staterra.staterrainjectionsystem.GlobalData.par";
     GlobalData globalData = new GlobalData();
-    public static MyBlueTooth blueTooth;
     Button page1;
     Button page2;
     Button page3;
@@ -22,19 +21,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        blueTooth = new MyBlueTooth(this, globalData);
         createButtons();
-        if(blueTooth.isConnected){
-            getMicroData();
-        }
-    }
-
-    public void getMicroData(){
-        try{
-            blueTooth.getTankTemp();
-        }catch(Exception e){
-
-        }
     }
 
     @Override
@@ -45,26 +32,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onResume(){
         super.onResume();
-    }
-
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        blueTooth.stopWorker = true;
-        if (blueTooth.mmInputStream != null) {
-            try {blueTooth.mmInputStream.close();} catch (Exception e) {}
-            blueTooth.mmInputStream = null;
-        }
-
-        if (blueTooth.mmOutputStream != null) {
-            try {blueTooth.mmOutputStream.close();} catch (Exception e) {}
-            blueTooth.mmOutputStream = null;
-        }
-
-        if (blueTooth.mmSocket != null) {
-            try {blueTooth.mmSocket.close();} catch (Exception e) {}
-            blueTooth.mmSocket = null;
-        }
     }
 
     private void createButtons(){

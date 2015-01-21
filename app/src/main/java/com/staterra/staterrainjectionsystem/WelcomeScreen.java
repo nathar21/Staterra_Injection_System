@@ -57,7 +57,10 @@ public class WelcomeScreen extends Activity {
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
-
+        Intent i= new Intent(this, MyBlueTooth.class);
+        // potentially add data to the intent
+        i.putExtra("KEY1", "Value to be used by the service");
+        startService(i);
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
         mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
