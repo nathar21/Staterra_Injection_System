@@ -33,13 +33,37 @@
             android:background="@color/black_overlay" android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <Button android:id="@+id/dummy_button" style="?metaButtonBarButtonStyle"
+            <Button android:id="@+id/dummy_button"
                 android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:text="System Check"
                 android:clickable="true"
-                android:textColor="#ffffffff" />
+                android:textColor="#ffffffff"
+                android:background="#3d3015"
+                style="?metaButtonBarButtonStyle" />
 
         </LinearLayout>
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:layout_gravity="center_horizontal|top"
+            android:clickable="true"
+            android:src="@drawable/banner_logo"
+            android:cropToPadding="false"
+            android:padding="20dp"
+            android:background="#3d3015"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp" />
+
+        <DigitalClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textClock"
+            android:layout_gravity="center"
+            android:textIsSelectable="false"
+            android:textSize="35dp" />
 
     </FrameLayout>
 
