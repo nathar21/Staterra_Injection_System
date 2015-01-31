@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">Staterra Injection System</string>
-    <string name="hello_world">Hello People!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_system_configuration">System Configuration</string>
     <string name="title_activity_data__exportation">Data Exportation</string>

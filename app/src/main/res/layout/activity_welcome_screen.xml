@@ -59,10 +59,29 @@
 
         <DigitalClock
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="119dp"
             android:id="@+id/textClock"
             android:layout_gravity="center"
             android:textIsSelectable="false"
+            android:textSize="35dp"
+            android:textColor="#ffffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="164dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="siteLocation"
+            android:id="@+id/textView18"
+            android:layout_gravity="center_horizontal|bottom"
+            android:textSize="35dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="date"
+            android:id="@+id/textView19"
+            android:layout_gravity="center"
             android:textSize="35dp" />
 
     </FrameLayout>
