@@ -23,6 +23,7 @@ public class MyBlueTooth extends Service {
     GlobalData globalData;
     AndroidFileWriter writer = new AndroidFileWriter();
 	private static final int REQUEST_ENABLE_BT = 1;
+    private int uploadProgress = 0;
 	BluetoothAdapter mBluetoothAdapter;
 	BluetoothDevice mmDevice;
 	OutputStream mmOutputStream;
@@ -42,7 +43,6 @@ public class MyBlueTooth extends Service {
             return MyBlueTooth.this;
         }
     }
-
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -156,6 +156,19 @@ public class MyBlueTooth extends Service {
 	                                    public void run()
 	                                    {
                                             System.out.println(data);
+                                            if(uploadProgress < 99){
+                                                uploadProgress++;
+                                            }
+                                            if(data.length() > 2){
+                                                String temp = "";
+                                                temp+= data.charAt(0);
+                                                temp+= data.charAt(1);
+                                                temp+= data.charAt(2);
+                                                if(temp.equalsIgnoreCase("EOF")){
+                                                    uploadProgress = 100;
+                                                    System.out.println("Progress = 100");
+                                                }
+                                            }
                                             if(isWriting){
                                                 writer.write(data);
 	                                    	}else if(gettingTemp){
@@ -207,6 +220,10 @@ public class MyBlueTooth extends Service {
     public void getDataFile() throws IOException{
         isWriting = true;
         mmOutputStream.write(10);
+    }
+
+    public int getProgress(){
+        return uploadProgress;
     }
 
 	public void stopBT() throws IOException
