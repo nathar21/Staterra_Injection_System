@@ -59,7 +59,7 @@ public class MyBlueTooth extends Service {
 	{
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		if (mBluetoothAdapter == null) {
-            //Toast.makeText(mainActivity.getApplicationContext(), "Device is not BT Capable", Toast.LENGTH_SHORT).show();
+
 		}else{
 		    enableBT();
 		}
@@ -68,7 +68,6 @@ public class MyBlueTooth extends Service {
 	public void enableBT(){
 		if (!mBluetoothAdapter.isEnabled()) {
 		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-		    //mainActivity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 		}else{
 			setPaired();
 		}
@@ -235,6 +234,10 @@ public class MyBlueTooth extends Service {
         isConnected = false;
         //Toast.makeText(mainActivity.getApplicationContext(), "BlueTooth Closed", Toast.LENGTH_SHORT).show();
 	}
+
+    public void restartProgress(){
+        uploadProgress = 0;
+    }
 
     public boolean isConnected(){
         return isConnected;

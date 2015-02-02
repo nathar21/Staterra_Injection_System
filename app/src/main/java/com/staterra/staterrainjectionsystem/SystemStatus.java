@@ -16,24 +16,21 @@ public class SystemStatus extends ActionBarActivity {
     TextView battLife;
     TextView nutrUsed;
     TextView nutrLeft;
-    TextView numLast;
-    TextView totalApp;
-    TextView avgApp;
+    //TextView numLast;
+    //TextView totalApp;
+    //TextView avgApp;
     private Button main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system__status);
-
-        //Hey Matt... Am I doing this right?
-        //can you access these variables??
-        //can't find the getTankTemp method... ?
         globalData = (GlobalData)getIntent().getParcelableExtra(MainActivity.PAR_KEY);
-        //tamper = (TextView)findViewById(R.id.tamper);
-        //tamper.setText(globalData.getTankTemp());
-        //battLife = (TextView)findViewById(R.id.tamper);
-        //battLife.setText(globalData.getTankTemp());
+        tamper = (TextView)findViewById(R.id.tamper);
+        tamper.setText(globalData.getTankTemp());
+        battLife = (TextView)findViewById(R.id.battLife);
+        battLife.setText(globalData.getTankTemp());
+        nutrUsed = (TextView)findViewById(R.id.nutrUsed);
         createButtons();
     }
 

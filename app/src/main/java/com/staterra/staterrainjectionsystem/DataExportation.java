@@ -64,6 +64,7 @@ public class DataExportation extends ActionBarActivity {
             public void onClick(View v) {
                 if(bluetooth.isConnected()){
                     try{
+                        bluetooth.restartProgress();
                         bluetooth.getDataFile();
                     }catch(IOException e){
 
