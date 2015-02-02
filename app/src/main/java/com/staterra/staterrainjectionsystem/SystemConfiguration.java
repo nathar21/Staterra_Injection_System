@@ -19,7 +19,7 @@ public class SystemConfiguration extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_configuration);
-        globalData = (GlobalData)getIntent().getParcelableExtra(MainActivity.PAR_KEY);
+        globalData = (GlobalData)getIntent().getParcelableExtra(WelcomeScreen.PAR_KEY);
         tankTemp = (TextView)findViewById(R.id.tankTemp);
         tankTemp.setText(globalData.getTankTemp());
         createButtons();

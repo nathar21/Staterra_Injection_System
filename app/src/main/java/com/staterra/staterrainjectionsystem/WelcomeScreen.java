@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.Button;
 
 public class WelcomeScreen extends Activity {
-    Button dummy;
+
+    public final static String PAR_KEY = "com.staterra.staterrainjectionsystem.GlobalData.par";
+    GlobalData globalData = new GlobalData();
+    Button systemCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +24,14 @@ public class WelcomeScreen extends Activity {
     }
 
     private void createButtons() {
-        dummy = (Button) findViewById(R.id.dummy_button);
+        systemCheck = (Button) findViewById(R.id.systemCheck);
 
-        dummy.setOnClickListener(new View.OnClickListener() {
+        systemCheck.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(WelcomeScreen.this, MainActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putParcelable(PAR_KEY, globalData);
+                myIntent.putExtras(mBundle);
                 WelcomeScreen.this.startActivity(myIntent);
             }
         });

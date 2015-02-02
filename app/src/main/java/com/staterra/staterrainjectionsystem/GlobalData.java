@@ -17,7 +17,25 @@ public class GlobalData implements Parcelable {
     private String tankTemp = "ND";
     private String irrigationTemp = "ND";
     private String nutrientAmountLeft = "ND";
+    private String nutrientAmountUsed = "ND";
     private String batteryLife = "ND";
+    private String tamper = "ND";
+
+    public String getTamper() {
+        return tamper;
+    }
+
+    public void setTamper(String tamper) {
+        this.tamper = tamper;
+    }
+
+    public String getNutrientAmountUsed() {
+        return nutrientAmountUsed;
+    }
+
+    public void setNutrientAmountUsed(String nutrientAmountUsed) {
+        this.nutrientAmountUsed = nutrientAmountUsed;
+    }
 
     public String getMonth() {
         return month;
@@ -113,7 +131,9 @@ public class GlobalData implements Parcelable {
         out.writeString(tankTemp);
         out.writeString(irrigationTemp);
         out.writeString(nutrientAmountLeft);
+        out.writeString(nutrientAmountUsed);
         out.writeString(batteryLife);
+        out.writeString(tamper);
     }
 
     public static final Parcelable.Creator<GlobalData> CREATOR = new Creator<GlobalData>() {
@@ -128,7 +148,9 @@ public class GlobalData implements Parcelable {
             gd.tankTemp = source.readString();
             gd.irrigationTemp = source.readString();
             gd.nutrientAmountLeft = source.readString();
+            gd.nutrientAmountUsed = source.readString();
             gd.batteryLife = source.readString();
+            gd.tamper = source.readString();
             return gd;
         }
         public GlobalData[] newArray(int size) {
@@ -136,4 +158,10 @@ public class GlobalData implements Parcelable {
         }
     };
 
+    public void setSystemData(String[] data){
+        tamper = data[0];
+        batteryLife = data[1];
+        nutrientAmountUsed = data[2];
+        nutrientAmountLeft = data[3];
+    }
 }

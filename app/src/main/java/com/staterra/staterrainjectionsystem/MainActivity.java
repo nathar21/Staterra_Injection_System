@@ -11,15 +11,15 @@ import android.widget.Button;
 //testing lola begs too good
 public class MainActivity extends ActionBarActivity {
 
-    public final static String PAR_KEY = "com.staterra.staterrainjectionsystem.GlobalData.par";
-    GlobalData globalData = new GlobalData();
-    Button page1;
-    Button page2;
-    Button page3;
+    Button systemConfig;
+    Button dataExport;
+    Button systemStatus;
+    GlobalData globalData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        globalData = (GlobalData)getIntent().getParcelableExtra(WelcomeScreen.PAR_KEY);
         setContentView(R.layout.activity_main);
         createButtons();
     }
@@ -35,30 +35,30 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void createButtons(){
-        page1 = (Button)findViewById(R.id.button);
-        page2 = (Button)findViewById(R.id.button2);
-        page3 = (Button)findViewById(R.id.button3);
+        systemConfig = (Button)findViewById(R.id.systemConfig);
+        dataExport = (Button)findViewById(R.id.dataExport);
+        systemStatus = (Button)findViewById(R.id.systemStatus);
 
-        page1.setOnClickListener(new View.OnClickListener() {
+        systemConfig.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, SystemConfiguration.class);
                 Bundle mBundle = new Bundle();
-                mBundle.putParcelable(PAR_KEY, globalData);
+                mBundle.putParcelable(WelcomeScreen.PAR_KEY, globalData);
                 myIntent.putExtras(mBundle);
                 MainActivity.this.startActivity(myIntent);
             }
         });
-        page2.setOnClickListener(new View.OnClickListener() {
+        dataExport.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, DataExportation.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });
-        page3.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        systemStatus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, SystemStatus.class);
                 Bundle mBundle = new Bundle();
-                mBundle.putParcelable(PAR_KEY, globalData);
+                mBundle.putParcelable(WelcomeScreen.PAR_KEY, globalData);
                 myIntent.putExtras(mBundle);
                 MainActivity.this.startActivity(myIntent);
             }

@@ -18,6 +18,8 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 
+import static com.staterra.staterrainjectionsystem.WelcomeScreen.*;
+
 public class MyBlueTooth extends Service {
     private final IBinder mBinder = new LocalBinder();
     GlobalData globalData;
@@ -36,7 +38,10 @@ public class MyBlueTooth extends Service {
 	volatile boolean stopWorker;
     public boolean isConnected = false;
 	boolean isWriting = false;
-    boolean gettingTemp = false;
+    boolean getSystemStatus = false;
+    private int systemStatusCount = 0;
+    final private int DATAMAX = 4;
+    public String systemStatusArr[] = new String[DATAMAX];
 
     public class LocalBinder extends Binder {
         MyBlueTooth getService() {
@@ -108,6 +113,7 @@ public class MyBlueTooth extends Service {
             notificationManager.notify(0, n);
             listenForData();
             isConnected = true;
+            getSystemStatus();
 	    }catch(Exception IOException){
             Notification n  = new Notification.Builder(this)
                     .setContentTitle("Staterra BlueTooth")
@@ -170,9 +176,14 @@ public class MyBlueTooth extends Service {
                                             }
                                             if(isWriting){
                                                 writer.write(data);
-	                                    	}else if(gettingTemp){
-                                                globalData.setTankTemp(data);
-                                                gettingTemp = false;
+	                                    	}else if(getSystemStatus){
+                                                systemStatusArr[systemStatusCount++] = data;
+                                                if(systemStatusCount == DATAMAX){
+                                                    getSystemStatus = false;
+                                                    systemStatusCount = 0;
+                                                }else{
+
+                                                }
 	                                    	}
 	                                    }
 	                                });
@@ -211,8 +222,8 @@ public class MyBlueTooth extends Service {
         mmOutputStream.flush();
 	}
 
-    public void getTankTemp() throws IOException{
-        gettingTemp = true;
+    public void getSystemStatus() throws IOException{
+        getSystemStatus = true;
         mmOutputStream.write(20);
     }
 
