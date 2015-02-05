@@ -4,7 +4,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,25 +27,59 @@ public class SystemStatus extends ActionBarActivity {
     TextView battLife;
     TextView nutrUsed;
     TextView nutrLeft;
+    String tamperStr = "No Data";
+    String battLifeStr = "No Data";
+    String nutrUsedStr = "No Data";
+    String nutrLeftStr = "No Data";
+    Thread thread;
     //TextView numLast;
     //TextView totalApp;
     //TextView avgApp;
     private Button main;
 
+    final Handler mHandler = new Handler();
+
+    // Create runnable for posting
+    final Runnable mUpdateResults = new Runnable() {
+        public void run() {
+            updateResultsInUi();
+        }
+    };
+
+    protected void startLongRunningOperation() {
+        // Fire off a thread to do some work that we shouldn't do directly in the UI thread
+        Thread t = new Thread() {
+            public void run() {
+                while(true){
+                    try{
+                        Thread.sleep(1000);
+                    }catch(Exception e){
+
+                    }
+                    getStatus();
+                    mHandler.post(mUpdateResults);
+                }
+            }
+        };
+        t.start();
+    }
+
+    private void updateResultsInUi() {
+        tamper.setText(tamperStr);
+        battLife.setText(battLifeStr);
+        nutrUsed.setText(nutrUsedStr);
+        nutrLeft.setText(nutrLeftStr);
+    }
+
+
     @Override
     protected void onStart() {
         super.onStart();
-        try{
-            if(bluetooth.isConnected()){
-                    bluetooth.getSystemStatus();
-                    Thread.sleep(1000);
-                    tamper.setText(bluetooth.systemStatusArr[0]);
-                    battLife.setText(bluetooth.systemStatusArr[1]);
-                    nutrUsed.setText(bluetooth.systemStatusArr[2]);
-                    nutrLeft.setText(bluetooth.systemStatusArr[3]);
-            }
-        }catch(Exception e){}
+    };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
     };
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -67,12 +103,12 @@ public class SystemStatus extends ActionBarActivity {
         setContentView(R.layout.activity_system__status);
         Intent intent = new Intent(this, MyBlueTooth.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        globalData = (GlobalData)getIntent().getParcelableExtra(WelcomeScreen.PAR_KEY);
         tamper = (TextView)findViewById(R.id.tamper);
         battLife = (TextView)findViewById(R.id.battLife);
         nutrUsed = (TextView)findViewById(R.id.nutrUsed);
         nutrLeft = (TextView)findViewById(R.id.nutrLeft);
         createButtons();
+        startLongRunningOperation();
     }
 
     private void createButtons(){
@@ -106,6 +142,29 @@ public class SystemStatus extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getStatus(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (bluetooth.isConnected()) {
+                bluetooth.getSystemStatus();
+                tamperStr = bluetooth.getTamper();
+                battLifeStr = bluetooth.getBatteryLife();
+                nutrUsedStr = bluetooth.getNutrUsed();
+                nutrLeftStr = bluetooth.getNutrLeft();
+            }
+        }catch(Exception e){}
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
     }
 
     @Override

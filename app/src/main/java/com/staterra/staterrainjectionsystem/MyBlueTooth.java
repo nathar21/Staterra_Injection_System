@@ -37,11 +37,15 @@ public class MyBlueTooth extends Service {
     String data;
 	volatile boolean stopWorker;
     public boolean isConnected = false;
-	boolean isWriting = false;
-    boolean getSystemStatus = false;
+	volatile boolean isWriting = false;
+    volatile boolean getSystemStatus = false;
     private int systemStatusCount = 0;
     final private int DATAMAX = 4;
-    public String systemStatusArr[] = new String[DATAMAX];
+    //0  =  tamper
+    //1  =  battery life
+    //2  =  nutrient used
+    //3  =  nutrient left
+    private String systemStatusArr[] = new String[DATAMAX];
 
     public class LocalBinder extends Binder {
         MyBlueTooth getService() {
@@ -160,7 +164,7 @@ public class MyBlueTooth extends Service {
 	                                {
 	                                    public void run()
 	                                    {
-                                            System.out.println(data);
+                                            //System.out.println(data);
                                             if(uploadProgress < 99){
                                                 uploadProgress++;
                                             }
@@ -172,6 +176,8 @@ public class MyBlueTooth extends Service {
                                                 if(temp.equalsIgnoreCase("EOF")){
                                                     uploadProgress = 100;
                                                     System.out.println("Progress = 100");
+                                                    writer.write("End File");
+                                                    isWriting = false;
                                                 }
                                             }
                                             if(isWriting){
@@ -253,4 +259,42 @@ public class MyBlueTooth extends Service {
     public boolean isConnected(){
         return isConnected;
     }
+
+
+    //0  =  tamper
+    //1  =  battery life
+    //2  =  nutrient used
+    //3  =  nutrient left
+    public String getTamper(){
+        if(systemStatusArr[0] != null){
+            return systemStatusArr[0];
+        }else{
+            return "No Data";
+        }
+    }
+
+    public String getBatteryLife(){
+        if(systemStatusArr[1] != null){
+            return systemStatusArr[1];
+        }else{
+            return "No Data";
+        }
+    }
+
+    public String getNutrUsed(){
+        if(systemStatusArr[2] != null){
+            return systemStatusArr[2];
+        }else{
+            return "No Data";
+        }
+    }
+
+    public String getNutrLeft(){
+        if(systemStatusArr[3] != null){
+            return systemStatusArr[3];
+        }else{
+            return "No Data";
+        }
+    }
+
 }

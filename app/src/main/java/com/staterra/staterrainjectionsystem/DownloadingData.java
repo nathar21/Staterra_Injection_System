@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.io.IOException;
 
@@ -21,6 +22,7 @@ public class DownloadingData extends ActionBarActivity {
     boolean btBounded = false;
     private ProgressBar mProgress;
     private int mProgressStatus = 0;
+    TextView message;
 
     private Handler mHandler = new Handler();
 
@@ -63,6 +65,7 @@ public class DownloadingData extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_downloading_data);
+        message = (TextView)findViewById(R.id.downloadMsg);
         mProgress = (ProgressBar) findViewById(R.id.progressBar);
         mProgress.setProgress(0);
         Intent intent = new Intent(this, MyBlueTooth.class);
@@ -82,9 +85,13 @@ public class DownloadingData extends ActionBarActivity {
                     mHandler.post(new Runnable() {
                         public void run() {
                             mProgress.setProgress(mProgressStatus);
+                            if(mProgressStatus == 100){
+                                message.setText("Done");
+                            }
                         }
                     });
                 }
+
             }
         }).start();
     }
