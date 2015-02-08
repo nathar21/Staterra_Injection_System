@@ -8,6 +8,41 @@
     tools:context="com.staterra.staterrainjectionsystem.SystemConfiguration"
     android:background="#798251">
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Set Injection Rate"
+        android:id="@+id/flowCal"
+        android:textColor="#ffffffff"
+        android:clickable="true"
+        android:background="#3d3015"
+        android:height="10dp"
+        android:layout_marginBottom="5dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Set Clock"
+        android:id="@+id/eventDisc"
+        android:textColor="#ffffffff"
+        android:height="10dp"
+        android:singleLine="false"
+        android:clickable="true"
+        android:background="#3d3015"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Advanced Settings"
+        android:id="@+id/advSet"
+        android:clickable="true"
+        android:textColor="#ffffffff"
+        android:height="10dp"
+        android:background="#3d3015"
+        android:layout_marginTop="5dp" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,6 +59,7 @@
             android:layout_alignParentStart="true"
             android:clickable="true"
             android:textColor="#ffffffff"
+            android:height="10dp"
             android:background="#3d3015" />
 
         <TextView
@@ -37,24 +73,6 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="84dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Advanced Settings"
-            android:id="@+id/button4"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:background="#3d3015"
-            android:textColor="#ffffffff" />
-
-        <TableLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"></TableLayout>
 
     </RelativeLayout>
 

@@ -45,6 +45,10 @@ public class MyBlueTooth extends Service {
     //1  =  battery life
     //2  =  nutrient used
     //3  =  nutrient left
+    //4  =  tank temperature
+    //5  =  battery temperature
+    //6  =  irrigation temperature
+    //7  =  flow rate
     private String systemStatusArr[] = new String[DATAMAX];
 
     public class LocalBinder extends Binder {
@@ -265,6 +269,10 @@ public class MyBlueTooth extends Service {
     //1  =  battery life
     //2  =  nutrient used
     //3  =  nutrient left
+    //4  =  tank temperature
+    //5  =  battery temperature
+    //6  =  irrigation temperature
+    //7  =  flow rate
     public String getTamper(){
         if(systemStatusArr[0] != null){
             return systemStatusArr[0];
@@ -297,4 +305,32 @@ public class MyBlueTooth extends Service {
         }
     }
 
+    public String getTankTemp(){
+        if(systemStatusArr[4] != null){
+            return systemStatusArr[4];
+        }else{
+            return "No Data";
+        }
+    }
+    public String getBattTemp(){
+        if(systemStatusArr[5] != null){
+            return systemStatusArr[5];
+        }else{
+            return "No Data";
+        }
+    }
+    public String getIrrgTemp(){
+        if(systemStatusArr[6] != null){
+            return systemStatusArr[6];
+        }else{
+            return "No Data";
+        }
+    }
+    public String getFlowRate(){
+        if(systemStatusArr[7] != null){
+            return systemStatusArr[7];
+        }else{
+            return "No Data";
+        }
+    }
 }

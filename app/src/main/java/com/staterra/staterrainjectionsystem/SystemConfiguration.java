@@ -1,5 +1,6 @@
 package com.staterra.staterrainjectionsystem;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,6 +15,10 @@ public class SystemConfiguration extends ActionBarActivity {
     GlobalData globalData;
     TextView tankTemp;
     private Button main;
+    private Button login;
+    private Button flowCal;
+    private Button eventDisc;
+    private Button advSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +32,35 @@ public class SystemConfiguration extends ActionBarActivity {
 
     private void createButtons(){
         main = (Button)findViewById(R.id.buttonMain1);
+        flowCal = (Button)findViewById(R.id.flowCal);
+        eventDisc = (Button)findViewById(R.id.eventDisc);
+        advSet = (Button)findViewById(R.id.advSet);
+
 
         main.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();
             }
         });
+        flowCal.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent = new Intent(SystemConfiguration.this, FlowCalibration.class);
+                SystemConfiguration.this.startActivity(myIntent);
+            }
+        });
+        eventDisc.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent = new Intent(SystemConfiguration.this, EventDiscriminator.class);
+                SystemConfiguration.this.startActivity(myIntent);
+            }
+        });
+        advSet.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent = new Intent(SystemConfiguration.this, LoginAvdSet.class);
+                SystemConfiguration.this.startActivity(myIntent);
+            }
+        });
+
     }
 
 

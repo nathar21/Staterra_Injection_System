@@ -53,7 +53,7 @@ public class DataExportation extends ActionBarActivity {
 
     private void createButtons(){
         main = (Button)findViewById(R.id.buttonMain2);
-        export = (Button)findViewById(R.id.buttonExport);
+        export = (Button)findViewById(R.id.flowCal);
 
         main.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

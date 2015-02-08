@@ -27,14 +27,19 @@ public class SystemStatus extends ActionBarActivity {
     TextView battLife;
     TextView nutrUsed;
     TextView nutrLeft;
-    String tamperStr = "No Data";
+    TextView tankTemp;
+    TextView battTemp;
+    TextView irrgTemp;
+    TextView flowRate;
+    String tamperStr   = "No Data";
     String battLifeStr = "No Data";
     String nutrUsedStr = "No Data";
     String nutrLeftStr = "No Data";
+    String tankTempStr = "No Data";
+    String battTempStr = "No Data";
+    String flowRateStr = "No Data";
+    String irrgTempStr = "No Data";
     Thread thread;
-    //TextView numLast;
-    //TextView totalApp;
-    //TextView avgApp;
     private Button main;
 
     final Handler mHandler = new Handler();
@@ -69,6 +74,10 @@ public class SystemStatus extends ActionBarActivity {
         battLife.setText(battLifeStr);
         nutrUsed.setText(nutrUsedStr);
         nutrLeft.setText(nutrLeftStr);
+        tankTemp.setText(tankTempStr);
+        battTemp.setText(battTempStr);
+        irrgTemp.setText(irrgTempStr);
+        flowRate.setText(flowRateStr);
     }
 
 
@@ -107,6 +116,10 @@ public class SystemStatus extends ActionBarActivity {
         battLife = (TextView)findViewById(R.id.battLife);
         nutrUsed = (TextView)findViewById(R.id.nutrUsed);
         nutrLeft = (TextView)findViewById(R.id.nutrLeft);
+        tankTemp = (TextView)findViewById(R.id.tankTemp);
+        battTemp = (TextView)findViewById(R.id.battTemp);
+        irrgTemp = (TextView)findViewById(R.id.irrgTemp);
+        flowRate = (TextView)findViewById(R.id.flowRate);
         createButtons();
         startLongRunningOperation();
     }
@@ -157,6 +170,11 @@ public class SystemStatus extends ActionBarActivity {
                 battLifeStr = bluetooth.getBatteryLife();
                 nutrUsedStr = bluetooth.getNutrUsed();
                 nutrLeftStr = bluetooth.getNutrLeft();
+                tankTempStr = bluetooth.getTankTemp();
+                battTempStr = bluetooth.getBattTemp();
+                irrgTempStr = bluetooth.getIrrgTemp();
+                flowRateStr = bluetooth.getFlowRate();
+
             }
         }catch(Exception e){}
     }

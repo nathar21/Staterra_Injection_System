@@ -49,13 +49,14 @@
             android:id="@+id/imageButton"
             android:layout_gravity="center_horizontal|top"
             android:clickable="true"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/banner_logo"
             android:cropToPadding="false"
             android:padding="20dp"
             android:background="#3d3015"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="40dp" />
+            android:layout_marginTop="40dp"
+            android:maxHeight="10dp" />
 
         <DigitalClock
             android:layout_width="wrap_content"
@@ -71,7 +72,7 @@
             android:layout_height="164dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="siteLocation"
-            android:id="@+id/textView18"
+            android:id="@+id/siteLocation"
             android:layout_gravity="center_horizontal|bottom"
             android:textSize="35dp" />
 
@@ -80,7 +81,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="date"
-            android:id="@+id/textView19"
+            android:id="@+id/welcomeDate"
             android:layout_gravity="center"
             android:textSize="35dp" />
 
