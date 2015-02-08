@@ -16,7 +16,8 @@
         android:textColor="#ffffffff"
         android:clickable="true"
         android:background="#3d3015"
-        android:height="10dp"
+        android:height="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp" />
 
     <Button
@@ -25,7 +26,7 @@
         android:text="Set Clock"
         android:id="@+id/eventDisc"
         android:textColor="#ffffffff"
-        android:height="10dp"
+        android:height="15dp"
         android:singleLine="false"
         android:clickable="true"
         android:background="#3d3015"
@@ -39,7 +40,7 @@
         android:id="@+id/advSet"
         android:clickable="true"
         android:textColor="#ffffffff"
-        android:height="10dp"
+        android:height="15dp"
         android:background="#3d3015"
         android:layout_marginTop="5dp" />
 
@@ -68,7 +69,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="No Temp"
             android:id="@+id/tankTemp"
-            android:textColor="#ffffffff"
+            android:textColor="#798251"
             android:layout_above="@+id/buttonMain1"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
