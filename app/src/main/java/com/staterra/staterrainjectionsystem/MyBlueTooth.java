@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
+import android.widget.TextView;
 
 import static com.staterra.staterrainjectionsystem.WelcomeScreen.*;
 
@@ -24,6 +25,7 @@ public class MyBlueTooth extends Service {
     private final IBinder mBinder = new LocalBinder();
     GlobalData globalData;
     AndroidFileWriter writer = new AndroidFileWriter();
+    TextView tempFlow;
 	private static final int REQUEST_ENABLE_BT = 1;
     private int uploadProgress = 0;
 	BluetoothAdapter mBluetoothAdapter;
@@ -37,10 +39,12 @@ public class MyBlueTooth extends Service {
     String data;
 	volatile boolean stopWorker;
     public boolean isConnected = false;
+    private volatile boolean isGettingFlowRate = false;
+    private String flowRate = "ND";
 	volatile boolean isWriting = false;
     volatile boolean getSystemStatus = false;
     private int systemStatusCount = 0;
-    final private int DATAMAX = 4;
+    final private int DATAMAX = 8;
     //0  =  tamper
     //1  =  battery life
     //2  =  nutrient used
@@ -168,7 +172,7 @@ public class MyBlueTooth extends Service {
 	                                {
 	                                    public void run()
 	                                    {
-                                            //System.out.println(data);
+                                            System.out.println(data);
                                             if(uploadProgress < 99){
                                                 uploadProgress++;
                                             }
@@ -194,7 +198,11 @@ public class MyBlueTooth extends Service {
                                                 }else{
 
                                                 }
-	                                    	}
+	                                    	}else if(isGettingFlowRate){
+                                                flowRate = data;
+                                                isGettingFlowRate = false;
+
+                                            }
 	                                    }
 	                                });
 	                            }
@@ -232,6 +240,20 @@ public class MyBlueTooth extends Service {
         mmOutputStream.flush();
 	}
 
+    public String getFlowRateStr(){
+        return flowRate;
+    }
+
+    public void setNewFlow(int newFlow){
+        try{
+            mmOutputStream.write(50);
+            mmOutputStream.write(newFlow);
+        }catch(IOException e){
+
+        }
+
+    }
+
     public void getSystemStatus() throws IOException{
         getSystemStatus = true;
         mmOutputStream.write(20);
@@ -240,6 +262,11 @@ public class MyBlueTooth extends Service {
     public void getDataFile() throws IOException{
         isWriting = true;
         mmOutputStream.write(10);
+    }
+
+    public void getSingleFlowRate() throws IOException{
+        isGettingFlowRate = true;
+        mmOutputStream.write(21);
     }
 
     public int getProgress(){
@@ -266,22 +293,35 @@ public class MyBlueTooth extends Service {
 
 
     //0  =  tamper
-    //1  =  battery life
-    //2  =  nutrient used
-    //3  =  nutrient left
-    //4  =  tank temperature
-    //5  =  battery temperature
-    //6  =  irrigation temperature
-    //7  =  flow rate
+    //1  =  tank temperature
+    //2  =  battery life
+    //3  =  battery temperature
+    //4  =  nutrient used
+    //5  =  nutrient left
+    //6  =  flow rate
+    //7  =  irrigation temperature
+
     public String getTamper(){
         if(systemStatusArr[0] != null){
-            return systemStatusArr[0];
+            int temp = 2;
+            try{
+                temp = Integer.parseInt(systemStatusArr[0].replaceAll("\\s",""));
+            }catch(Exception e){
+
+            }
+            if(temp == 0){
+                return "Untampered";
+            }else if(temp == 1){
+                return "Tampered";
+            }else{
+                return "ND";
+            }
         }else{
             return "No Data";
         }
     }
 
-    public String getBatteryLife(){
+    public String getTankTemp(){
         if(systemStatusArr[1] != null){
             return systemStatusArr[1];
         }else{
@@ -289,7 +329,7 @@ public class MyBlueTooth extends Service {
         }
     }
 
-    public String getNutrUsed(){
+    public String getBatteryLife(){
         if(systemStatusArr[2] != null){
             return systemStatusArr[2];
         }else{
@@ -297,7 +337,7 @@ public class MyBlueTooth extends Service {
         }
     }
 
-    public String getNutrLeft(){
+    public String getBattTemp(){
         if(systemStatusArr[3] != null){
             return systemStatusArr[3];
         }else{
@@ -305,28 +345,31 @@ public class MyBlueTooth extends Service {
         }
     }
 
-    public String getTankTemp(){
+    public String getNutrUsed(){
         if(systemStatusArr[4] != null){
             return systemStatusArr[4];
         }else{
             return "No Data";
         }
     }
-    public String getBattTemp(){
+
+    public String getNutrLeft(){
         if(systemStatusArr[5] != null){
             return systemStatusArr[5];
         }else{
             return "No Data";
         }
     }
-    public String getIrrgTemp(){
+
+    public String getFlowRate(){
         if(systemStatusArr[6] != null){
             return systemStatusArr[6];
         }else{
             return "No Data";
         }
     }
-    public String getFlowRate(){
+
+    public String getIrrgTemp(){
         if(systemStatusArr[7] != null){
             return systemStatusArr[7];
         }else{

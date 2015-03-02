@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 public class WelcomeScreen extends Activity {
 
     TextView welcomeDate;
     TextView siteLocation;
     String wlcDateStr;
-    String siteLocStr;
+    String siteLocStr = "UWB Demo";
 
     public final static String PAR_KEY = "com.staterra.staterrainjectionsystem.GlobalData.par";
     GlobalData globalData = new GlobalData();
@@ -30,8 +32,16 @@ public class WelcomeScreen extends Activity {
     }
 
     private void createButtons() {
+        welcomeDate = (TextView)findViewById(R.id.welcomeDate);
+        siteLocation = (TextView)findViewById(R.id.siteLocation);
         systemCheck = (Button) findViewById(R.id.systemCheck);
-
+        Calendar c = Calendar.getInstance();
+        int month = c.get(Calendar.MONTH) + 1;
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int year = c.get(Calendar.YEAR);
+        String date = String.valueOf(month) + "/" + String.valueOf(day) + "/" + String.valueOf(year);
+        welcomeDate.setText(date);
+        siteLocation.setText(siteLocStr);
         systemCheck.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(WelcomeScreen.this, MainActivity.class);

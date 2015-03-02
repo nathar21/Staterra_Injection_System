@@ -65,18 +65,20 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/enteredFlow"
         android:layout_below="@+id/textView12"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:layout_alignRight="@+id/textView12"
+        android:layout_alignEnd="@+id/textView12" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Set"
         android:id="@+id/flowSet"
-        android:layout_alignBottom="@+id/editText"
+        android:layout_alignBottom="@+id/enteredFlow"
         android:layout_toRightOf="@+id/textView12"
         android:layout_toEndOf="@+id/textView12"
         android:textColor="#ffffffff"

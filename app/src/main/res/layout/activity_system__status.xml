@@ -77,13 +77,12 @@
                 android:textColor="#ffffffff"
                 android:gravity="right"
                 android:background="#3d3015"
-                android:paddingRight="5dp"
                 android:textSize="15dp" />
         </TableRow>
 
         <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,7 +104,8 @@
                 android:layout_column="2"
                 android:background="#3d3015"
                 android:textColor="#ffffffff"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:gravity="right" />
         </TableRow>
 
         <TableRow
@@ -163,7 +163,6 @@
                 android:layout_column="2"
                 android:gravity="right"
                 android:background="#3d3015"
-                android:paddingRight="5dp"
                 android:textSize="15dp" />
         </TableRow>
 
@@ -191,7 +190,8 @@
                 android:layout_column="2"
                 android:background="#3d3015"
                 android:textColor="#ffffffff"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:gravity="right" />
         </TableRow>
 
         <TableRow
@@ -254,7 +254,6 @@
                 android:textColor="#ffffffff"
                 android:gravity="right"
                 android:background="#3d3015"
-                android:paddingRight="5dp"
                 android:textSize="15dp" />
 
         </TableRow>
@@ -300,7 +299,6 @@
                 android:layout_column="2"
                 android:gravity="right"
                 android:background="#3d3015"
-                android:paddingRight="5dp"
                 android:textSize="15dp" />
 
         </TableRow>
@@ -365,7 +363,6 @@
                 android:layout_column="2"
                 android:gravity="right"
                 android:background="#3d3015"
-                android:paddingRight="5dp"
                 android:textSize="15dp" />
 
         </TableRow>
@@ -400,7 +397,6 @@
                 android:layout_column="2"
                 android:gravity="right"
                 android:background="#3d3015"
-                android:paddingRight="5dp"
                 android:textSize="15dp" />
         </TableRow>
 

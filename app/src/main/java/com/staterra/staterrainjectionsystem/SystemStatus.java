@@ -39,7 +39,8 @@ public class SystemStatus extends ActionBarActivity {
     String battTempStr = "No Data";
     String flowRateStr = "No Data";
     String irrgTempStr = "No Data";
-    Thread thread;
+    Thread t;
+    private boolean isLongRunningOperation = false;
     private Button main;
 
     final Handler mHandler = new Handler();
@@ -53,9 +54,10 @@ public class SystemStatus extends ActionBarActivity {
 
     protected void startLongRunningOperation() {
         // Fire off a thread to do some work that we shouldn't do directly in the UI thread
-        Thread t = new Thread() {
+        isLongRunningOperation = true;
+        t = new Thread() {
             public void run() {
-                while(true){
+                while(isLongRunningOperation){
                     try{
                         Thread.sleep(1000);
                     }catch(Exception e){
@@ -67,6 +69,15 @@ public class SystemStatus extends ActionBarActivity {
             }
         };
         t.start();
+    }
+
+    protected void stopLongRunningOperation(){
+        isLongRunningOperation = false;
+        try{
+            t.join();
+        }catch(Exception e){
+
+        }
     }
 
     private void updateResultsInUi() {
@@ -89,6 +100,7 @@ public class SystemStatus extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        startLongRunningOperation();
     };
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -167,22 +179,24 @@ public class SystemStatus extends ActionBarActivity {
             if (bluetooth.isConnected()) {
                 bluetooth.getSystemStatus();
                 tamperStr = bluetooth.getTamper();
+                tankTempStr = bluetooth.getTankTemp();
                 battLifeStr = bluetooth.getBatteryLife();
+                battTempStr = bluetooth.getBattTemp();
                 nutrUsedStr = bluetooth.getNutrUsed();
                 nutrLeftStr = bluetooth.getNutrLeft();
-                tankTempStr = bluetooth.getTankTemp();
-                battTempStr = bluetooth.getBattTemp();
-                irrgTempStr = bluetooth.getIrrgTemp();
                 flowRateStr = bluetooth.getFlowRate();
+                irrgTempStr = bluetooth.getIrrgTemp();
 
             }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println("EXCEPTION");
+        }
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-
+        stopLongRunningOperation();
     }
 
     @Override
